@@ -1,4 +1,4 @@
-package com.example.cooks_social
+package com.rithikjain.cooks_social
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

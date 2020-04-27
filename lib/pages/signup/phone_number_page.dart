@@ -94,7 +94,7 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                                     child: TextFormField(
                                       validator: (value) {
                                         if (value.length != 10) {
-                                          return "Please enter a valide phone number";
+                                          return "Please enter a valid phone number";
                                         }
                                         return null;
                                       },

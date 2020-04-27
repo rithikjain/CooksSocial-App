@@ -1,4 +1,4 @@
-import 'package:cooks_social/pages/signup/enter_phone_page.dart';
+import 'package:cooks_social/pages/landing/landing_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -10,12 +10,13 @@ class MyApp extends StatelessWidget {
       title: "Cooks Social",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: "Open Sans",
+        fontFamily: "Montserrat",
+        primaryColor: Color(0xFF2081C3),
         pageTransitionsTheme: PageTransitionsTheme(builders: {
           TargetPlatform.android: ZoomPageTransitionsBuilder(),
         }),
       ),
-      home: EnterPhone(),
+      home: LandingPage(),
     );
   }
 }

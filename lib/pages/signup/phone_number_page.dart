@@ -6,6 +6,8 @@ class PhoneNumberPage extends StatefulWidget {
 }
 
 class _PhoneNumberPageState extends State<PhoneNumberPage> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -87,11 +89,21 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                               ),
                               child: Column(
                                 children: <Widget>[
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: "Enter 10 digit phone no.",
-                                      labelText: "Phone Number",
+                                  Form(
+                                    key: _formKey,
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value.length != 10) {
+                                          return "Please enter a valide phone number";
+                                        }
+                                        return null;
+                                      },
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: "Enter 10 digit phone no.",
+                                        labelText: "Phone Number",
+                                      ),
                                     ),
                                   ),
                                   Container(
@@ -109,7 +121,11 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                                         ),
                                       ),
                                       color: Theme.of(context).primaryColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        if (_formKey.currentState.validate()) {
+                                          print("correct");
+                                        }
+                                      },
                                     ),
                                   ),
                                 ],

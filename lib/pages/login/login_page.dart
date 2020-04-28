@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: Image.asset(
                       "assets/images/bg.png",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.none,
                       color: Color(0xFFDB162F),
                     ),
                   ),

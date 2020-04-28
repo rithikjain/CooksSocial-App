@@ -39,13 +39,31 @@ class _HolderState extends State<Holder> {
         bloc: _loginBloc,
         listener: (context, state) {
           if (state is LoginFailedState) {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
-            ));
+            final snackBar = SnackBar(
+              content: Text(
+                state.message,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              backgroundColor: Color(0xFFFC6C6C),
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
           } else if (state is LoginSuccessfulState) {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text("Login Succees"),
-            ));
+            final snackBar = SnackBar(
+              content: Text(
+                "Login Successful",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              backgroundColor: Colors.green,
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
           }
         },
         child: BlocBuilder<LoginBloc, LoginState>(

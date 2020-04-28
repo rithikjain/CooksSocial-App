@@ -165,6 +165,7 @@ class _OTPPageState extends State<OTPPage> {
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 14,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                   backgroundColor:

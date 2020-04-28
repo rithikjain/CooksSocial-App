@@ -134,7 +134,7 @@ class _OTPPageState extends State<OTPPage> {
                                         vertical: 32,
                                       ),
                                       child: Builder(
-                                        builder: (context) => FlatButton(
+                                        builder: (context) => MaterialButton(
                                           padding: EdgeInsets.all(18),
                                           child: setUpButtonChild(),
                                           color: Theme.of(context).primaryColor,

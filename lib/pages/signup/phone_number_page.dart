@@ -1,4 +1,5 @@
 import 'package:cooks_social/data/repositories/firebase_auth.dart';
+import 'package:cooks_social/pages/login/login_page.dart';
 import 'package:cooks_social/pages/signup/otp_page.dart';
 import 'package:cooks_social/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +118,7 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                                     margin: EdgeInsets.symmetric(
                                       vertical: 32,
                                     ),
-                                    child: FlatButton(
+                                    child: MaterialButton(
                                       padding: EdgeInsets.all(18),
                                       child: Text(
                                         "SEND OTP",
@@ -169,13 +170,23 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                                 fontSize: 16,
                               ),
                             ),
-                            Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                            InkWell(
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => LoginPage(),
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),

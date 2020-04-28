@@ -86,12 +86,13 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Container(
+                        width: MediaQuery.of(context).size.width * 2 / 3,
                         child: Column(
                           children: <Widget>[
                             Container(
                               margin: EdgeInsets.symmetric(
-                                horizontal: 82,
-                                vertical: 32,
+                                horizontal: 16,
+                                vertical: 16,
                               ),
                               child: Column(
                                 children: <Widget>[

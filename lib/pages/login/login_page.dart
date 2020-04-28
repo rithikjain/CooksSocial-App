@@ -53,95 +53,99 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 height: double.infinity,
                 width: double.infinity,
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 82,
-                    vertical: 32,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 8),
-                              child: TextFormField(
-                                controller: _emailController,
-                                validator: validateEmail,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: "chef123@gmail.com",
-                                  labelText: "Email Address",
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 2 / 3,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 8),
+                                child: TextFormField(
+                                  controller: _emailController,
+                                  validator: validateEmail,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: "chef123@gmail.com",
+                                    labelText: "Email Address",
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 8),
-                              child: TextFormField(
-                                controller: _passwordController,
-                                keyboardType: TextInputType.text,
-                                obscureText: !_passwordVisible,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: "Password",
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _passwordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 8),
+                                child: TextFormField(
+                                  controller: _passwordController,
+                                  keyboardType: TextInputType.text,
+                                  obscureText: !_passwordVisible,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: "Password",
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _passwordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _passwordVisible = !_passwordVisible;
+                                        });
+                                      },
                                     ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _passwordVisible = !_passwordVisible;
-                                      });
-                                    },
                                   ),
                                 ),
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: InkWell(
-                                child: Text(
-                                  "Forgot Password?",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                  child: Text(
+                                    "Forgot Password?",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
+                                  onTap: () {},
                                 ),
-                                onTap: () {},
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                          top: 56,
-                        ),
-                        child: MaterialButton(
-                          padding: EdgeInsets.all(18),
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
+                            ],
                           ),
-                          color: Theme.of(context).primaryColor,
-                          onPressed: () {
-                            if (_formKey.currentState.validate()) {
-                              print("valid");
-                            }
-                          },
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                            top: 56,
+                          ),
+                          child: MaterialButton(
+                            padding: EdgeInsets.all(18),
+                            child: Text(
+                              "LOGIN",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
+                            color: Theme.of(context).primaryColor,
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {
+                                print("valid");
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 transform: Matrix4.translationValues(0, -20, 0),

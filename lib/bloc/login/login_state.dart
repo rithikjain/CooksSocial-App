@@ -3,7 +3,7 @@ part of 'login_bloc.dart';
 abstract class LoginState extends Equatable {
   const LoginState();
 
-  List<Object> get props => [];
+  List<Object> get props => null;
 }
 
 class LoginInitial extends LoginState {}

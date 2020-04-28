@@ -11,7 +11,7 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  AuthRepository authRepository;
+  AuthRepository authRepository = AuthRepository();
 
   @override
   LoginState get initialState => LoginInitial();
@@ -23,7 +23,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginInitiatedEvent) {
       yield LoginLoadingState();
       try {
-        var loginResponse = await authRepository.loginUser(event.email, event.password);
+        var loginResponse = await authRepository.loginUser(
+          email: event.email,
+          password: event.password,
+        );
         SharedPref.setUserAuthToken(loginResponse.token);
         yield LoginSuccessfulState(user: loginResponse.user);
       } catch (e) {

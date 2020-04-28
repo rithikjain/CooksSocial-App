@@ -15,6 +15,7 @@ class _OTPPageState extends State<OTPPage> {
   final _formKey = GlobalKey<FormState>();
   String _userNum = "8197512342";
   TextEditingController _controller = TextEditingController();
+  int _state = 0;
 
   getUserNum() async {
     _userNum = await SharedPref.getUserPhoneNum();
@@ -135,24 +136,27 @@ class _OTPPageState extends State<OTPPage> {
                                       child: Builder(
                                         builder: (context) => FlatButton(
                                           padding: EdgeInsets.all(18),
-                                          child: Text(
-                                            "VERIFY OTP",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            ),
-                                          ),
+                                          child: setUpButtonChild(),
                                           color: Theme.of(context).primaryColor,
                                           onPressed: () async {
                                             bool isSignedIn = false;
                                             if (_formKey.currentState
                                                 .validate()) {
+                                              setState(() {
+                                                _state = 1;
+                                              });
                                               isSignedIn = await widget.auth
                                                   .signInPhoneNumber(
                                                       _controller.text);
                                               if (isSignedIn) {
+                                                setState(() {
+                                                  _state = 2;
+                                                });
                                                 print("SignedIn");
                                               } else {
+                                                setState(() {
+                                                  _state = 0;
+                                                });
                                                 final snackBar = SnackBar(
                                                   content: Text(
                                                     "Hmm, looks like the OTP is incorrect, Try again!",
@@ -161,7 +165,8 @@ class _OTPPageState extends State<OTPPage> {
                                                       fontSize: 14,
                                                     ),
                                                   ),
-                                                  backgroundColor: Color(0xFFFC6C6C),
+                                                  backgroundColor:
+                                                      Color(0xFFFC6C6C),
                                                 );
                                                 Scaffold.of(context)
                                                     .showSnackBar(snackBar);
@@ -210,5 +215,23 @@ class _OTPPageState extends State<OTPPage> {
         ),
       ),
     );
+  }
+
+  Widget setUpButtonChild() {
+    if (_state == 0) {
+      return Text(
+        "VERIFY OTP",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 18,
+        ),
+      );
+    } else if (_state == 1) {
+      return Container(
+        child: LinearProgressIndicator(backgroundColor: Colors.white),
+      );
+    } else {
+      return Icon(Icons.check, color: Colors.white);
+    }
   }
 }

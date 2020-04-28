@@ -4,45 +4,38 @@ class FirebasePhoneAuth {
   String verificationID;
 
   Future<void> sendCodeToPhoneNumber(String phoneNumber) async {
-    final PhoneVerificationCompleted verificationCompleted = (_) {
-      print("Verified");
-    };
-
-    final PhoneVerificationFailed verificationFailed = (AuthException e) {
-      print(e.message);
-    };
-
     final PhoneCodeSent codeSent =
         (String verificationId, [int forceResendingToken]) async {
       this.verificationID = verificationId;
       print("Code Sent");
     };
 
-    final PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationId) {
-      this.verificationID = verificationId;
-      print("Time out");
-    };
-
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: "+91" + phoneNumber,
-      timeout: Duration(seconds: 5),
-      verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed,
+      timeout: Duration(seconds: 4),
+      verificationCompleted: null,
+      verificationFailed: null,
       codeSent: codeSent,
-      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+      codeAutoRetrievalTimeout: null,
     );
   }
 
-  void signInPhoneNumber(String smsCode) async {
+  Future<bool> signInPhoneNumber(String smsCode) async {
     final AuthCredential credential = PhoneAuthProvider.getCredential(
       verificationId: verificationID,
       smsCode: smsCode,
     );
-    AuthResult authResult = await FirebaseAuth.instance.signInWithCredential(credential);
-    FirebaseUser user = authResult.user;
-    if (user != null) {
-      print("Signed In");
+    try {
+      AuthResult authResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      FirebaseUser user = authResult.user;
+      if (user != null) {
+        print("Signed In");
+        return true;
+      }
+    } catch (e) {
+      return false;
     }
+    return false;
   }
 }

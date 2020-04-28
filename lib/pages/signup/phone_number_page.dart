@@ -1,3 +1,6 @@
+import 'package:cooks_social/data/repositories/firebase_auth.dart';
+import 'package:cooks_social/pages/signup/otp_page.dart';
+import 'package:cooks_social/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 class PhoneNumberPage extends StatefulWidget {
@@ -7,6 +10,8 @@ class PhoneNumberPage extends StatefulWidget {
 
 class _PhoneNumberPageState extends State<PhoneNumberPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _controller = TextEditingController();
+  FirebasePhoneAuth auth = FirebasePhoneAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +97,7 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                                   Form(
                                     key: _formKey,
                                     child: TextFormField(
+                                      controller: _controller,
                                       validator: (value) {
                                         if (value.length != 10) {
                                           return "Please enter a valid phone number";
@@ -123,7 +129,20 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                                       color: Theme.of(context).primaryColor,
                                       onPressed: () {
                                         if (_formKey.currentState.validate()) {
-                                          print("correct");
+                                          SharedPref.setUserPhoneNum(
+                                              _controller.text);
+                                          auth
+                                              .sendCodeToPhoneNumber(
+                                                  _controller.text)
+                                              .then((_) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (_) =>
+                                                    OTPPage(auth: auth),
+                                              ),
+                                            );
+                                          });
                                         }
                                       },
                                     ),

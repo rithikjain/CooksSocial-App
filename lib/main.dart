@@ -1,7 +1,16 @@
 import 'package:cooks_social/pages/landing/landing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Color(0xFFFC6C6C),
+    ),
+  );
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

@@ -1,5 +1,4 @@
 import 'package:cooks_social/bloc/login/login_bloc.dart';
-import 'package:cooks_social/data/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,10 +11,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: BlocProvider(
-      create: (context) => LoginBloc(),
-      child: Holder(),
-    ));
+      body: BlocProvider(
+        create: (context) => LoginBloc(),
+        child: Holder(),
+      ),
+    );
   }
 }
 
@@ -211,16 +211,18 @@ class _HolderState extends State<Holder> {
                         padding: EdgeInsets.all(18),
                         child: setUpButtonChild(loginState),
                         color: Theme.of(context).primaryColor,
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            loginBloc.add(
-                              LoginInitiatedEvent(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              ),
-                            );
-                          }
-                        },
+                        onPressed: loginState is LoginLoadingState
+                            ? null
+                            : () async {
+                                if (_formKey.currentState.validate()) {
+                                  loginBloc.add(
+                                    LoginInitiatedEvent(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                  );
+                                }
+                              },
                       ),
                     ),
                   ],

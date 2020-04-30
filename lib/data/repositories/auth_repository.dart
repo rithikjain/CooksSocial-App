@@ -9,7 +9,8 @@ import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRepository {
-  Future<LoginResponse> loginUser({@required String email, @required String password}) async {
+  Future<LoginResponse> loginUser(
+      {@required String email, @required String password}) async {
     String url = BASE_URL + "user/login";
     Map credentials = {
       "email": email,
@@ -28,12 +29,12 @@ class AuthRepository {
         print(data);
         return loginResponse;
       } else if (response.statusCode == 404) {
-        throw Exception("Incorrect credentials");
+        throw "Incorrect credentials";
       } else {
-        throw Exception("Oof, something wrong on our end");
+        throw "Oof, something wrong on our end";
       }
     } on SocketException {
-      throw Exception("No internet connection");
+      throw "No internet connection";
     }
   }
 
@@ -43,24 +44,26 @@ class AuthRepository {
       var response = await Dio().post(
         url,
         data: formData,
-        onSendProgress: (sent, total) {
-          print("progress: $sent/$total");
-        }
       );
       if (response.statusCode == 201) {
-        var data = json.decode(response.data);
-        SignupResponse signupResponse = SignupResponse.fromJson(data);
-        print(data);
+        SignupResponse signupResponse = SignupResponse.fromJson(response.data);
+        print(signupResponse.message);
         return signupResponse;
-      } else if (response.statusCode == 404) {
-        throw Exception("Bad request");
-      } else if (response.statusCode == 408) {
-        throw Exception("Timeout");
       } else {
-        throw Exception("Oof, something wrong on our end");
+        throw "Oof some weird error";
       }
     } on SocketException {
       throw Exception("No internet connection");
+    } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        throw "Bad request";
+      } else if (e.response.statusCode == 408) {
+        throw "Timeout";
+      } else if (e.response.statusCode == 409) {
+        throw "User with that Email or Username exists";
+      } else {
+        throw "Oof, something wrong on our end";
+      }
     }
   }
 }

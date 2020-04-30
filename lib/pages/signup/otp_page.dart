@@ -1,4 +1,5 @@
 import 'package:cooks_social/data/repositories/firebase_auth.dart';
+import 'package:cooks_social/pages/signup/signup_page.dart';
 import 'package:cooks_social/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
@@ -140,42 +141,53 @@ class _OTPPageState extends State<OTPPage> {
                                           padding: EdgeInsets.all(18),
                                           child: setUpButtonChild(),
                                           color: Theme.of(context).primaryColor,
-                                          onPressed: () async {
-                                            bool isSignedIn = false;
-                                            if (_formKey.currentState
-                                                .validate()) {
-                                              setState(() {
-                                                _state = 1;
-                                              });
-                                              isSignedIn = await widget.auth
-                                                  .signInPhoneNumber(
-                                                      _controller.text);
-                                              if (isSignedIn) {
-                                                setState(() {
-                                                  _state = 2;
-                                                });
-                                                print("SignedIn");
-                                              } else {
-                                                setState(() {
-                                                  _state = 0;
-                                                });
-                                                final snackBar = SnackBar(
-                                                  content: Text(
-                                                    "Hmm, looks like the OTP is incorrect, Try again!",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  backgroundColor:
-                                                      Color(0xFFFC6C6C),
-                                                );
-                                                Scaffold.of(context)
-                                                    .showSnackBar(snackBar);
-                                              }
-                                            }
-                                          },
+                                          onPressed: _state == 1
+                                              ? null
+                                              : () async {
+                                                  bool isSignedIn = false;
+                                                  if (_formKey.currentState
+                                                      .validate()) {
+                                                    setState(() {
+                                                      _state = 1;
+                                                    });
+                                                    isSignedIn = await widget
+                                                        .auth
+                                                        .signInPhoneNumber(
+                                                            _controller.text);
+                                                    if (isSignedIn) {
+                                                      setState(() {
+                                                        _state = 2;
+                                                      });
+                                                      Navigator.pop(context);
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SignupPage()),
+                                                      );
+                                                    } else {
+                                                      setState(() {
+                                                        _state = 0;
+                                                      });
+                                                      final snackBar = SnackBar(
+                                                        content: Text(
+                                                          "Hmm, looks like the OTP is incorrect, Try again!",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                        backgroundColor:
+                                                            Color(0xFFFC6C6C),
+                                                      );
+                                                      Scaffold.of(context)
+                                                          .showSnackBar(
+                                                              snackBar);
+                                                    }
+                                                  }
+                                                },
                                         ),
                                       ),
                                     ),

@@ -1,6 +1,4 @@
 import 'package:cooks_social/pages/landing/landing_page.dart';
-import 'package:cooks_social/pages/login/login_page.dart';
-import 'package:cooks_social/pages/signup/signup_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
           TargetPlatform.android: ZoomPageTransitionsBuilder(),
         }),
       ),
-      home: SignupPage(),
+      home: LandingPage(),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:cooks_social/pages/landing/landing_page.dart';
+import 'package:cooks_social/pages/mainapp/home_page.dart';
+import 'package:cooks_social/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -25,7 +27,16 @@ class MyApp extends StatelessWidget {
           TargetPlatform.android: ZoomPageTransitionsBuilder(),
         }),
       ),
-      home: LandingPage(),
+      home: FutureBuilder<String>(
+        future: SharedPref.getUserAuthToken(),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.hasData) {
+            return HomePage();
+          } else {
+            return LandingPage();
+          }
+        },
+      ),
     );
   }
 }

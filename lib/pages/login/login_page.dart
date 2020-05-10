@@ -1,6 +1,7 @@
 import 'package:cooks_social/bloc/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -108,8 +109,8 @@ class _HolderState extends State<Holder> {
                 decoration: BoxDecoration(
                   color: Color(0xFFFC6C6C),
                 ),
-                child: Image.asset(
-                  "assets/images/bg.png",
+                child: SvgPicture.asset(
+                  "assets/images/bg.svg",
                   fit: BoxFit.none,
                   color: Color(0xFFDB162F),
                 ),

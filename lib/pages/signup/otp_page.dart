@@ -2,6 +2,7 @@ import 'package:cooks_social/data/repositories/firebase_auth.dart';
 import 'package:cooks_social/pages/signup/signup_page.dart';
 import 'package:cooks_social/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class OTPPage extends StatefulWidget {
   final FirebasePhoneAuth auth;
@@ -45,8 +46,8 @@ class _OTPPageState extends State<OTPPage> {
                     decoration: BoxDecoration(
                       color: Color(0xFFFC6C6C),
                     ),
-                    child: Image.asset(
-                      "assets/images/bg.png",
+                    child: SvgPicture.asset(
+                      "assets/images/bg.svg",
                       fit: BoxFit.fill,
                       color: Color(0xFFDB162F),
                     ),

@@ -2,6 +2,7 @@ import 'package:cooks_social/pages/landing/landing_page_1.dart';
 import 'package:cooks_social/pages/landing/landing_page_2.dart';
 import 'package:cooks_social/pages/signup/phone_number_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class LandingPage extends StatefulWidget {
@@ -32,8 +33,8 @@ class _LandingPageState extends State<LandingPage> {
                       decoration: BoxDecoration(
                         color: Color(0xFFFC6C6C),
                       ),
-                      child: Image.asset(
-                        "assets/images/bg.png",
+                      child: SvgPicture.asset(
+                        "assets/images/bg.svg",
                         fit: BoxFit.fill,
                         color: Color(0xFFDB162F),
                       ),

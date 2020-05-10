@@ -3,6 +3,7 @@ import 'package:cooks_social/pages/login/login_page.dart';
 import 'package:cooks_social/pages/signup/otp_page.dart';
 import 'package:cooks_social/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PhoneNumberPage extends StatefulWidget {
   @override
@@ -29,8 +30,8 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                   decoration: BoxDecoration(
                     color: Color(0xFFFC6C6C),
                   ),
-                  child: Image.asset(
-                    "assets/images/bg.png",
+                  child: SvgPicture.asset(
+                    "assets/images/bg.svg",
                     fit: BoxFit.fill,
                     color: Color(0xFFDB162F),
                   ),

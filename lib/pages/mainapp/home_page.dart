@@ -1,3 +1,4 @@
+import 'package:cooks_social/widgets/home_page_empty.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,12 +14,12 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SvgPicture.asset("assets/images/logo.svg"),
-            Icon(Icons.star_border, color: Colors.black,),
+            Icon(Icons.star_border, color: Colors.black),
           ],
         ),
       ),
       body: Center(
-        child: Text('HomePage'),
+        child: HomePageEmpty(),
       ),
     );
   }

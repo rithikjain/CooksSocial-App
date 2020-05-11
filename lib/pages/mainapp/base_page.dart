@@ -39,7 +39,7 @@ class _BasePageState extends State<BasePage> {
         reverse: true,
         items: [
           TitledNavigationBarItem(title: Text('Home'), icon: Icons.home),
-          TitledNavigationBarItem(title: Text('Search'), icon: Icons.search),
+          TitledNavigationBarItem(title: Text('Explore'), icon: Icons.search),
           TitledNavigationBarItem(title: Text('Add Recipe'), icon: Icons.add),
           TitledNavigationBarItem(
             title: Text('Alerts'),

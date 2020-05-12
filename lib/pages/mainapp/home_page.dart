@@ -1,4 +1,5 @@
 import 'package:cooks_social/widgets/home_page_empty.dart';
+import 'package:cooks_social/widgets/home_page_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: HomePageEmpty(),
+        child: HomePageFeed(),
       ),
     );
   }
